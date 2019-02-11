@@ -31,6 +31,21 @@ app.get('/shopping-list', (req, res) => {
   res.json(ShoppingList.get());
 });
 
+//Import Recipe Model
+const {Recipes} = require('./models');
+
+//Add a couple of recipes to the model when the server starts
+
+Recipes.create('Avocado Toast', ['Avocado','Toast'])
+Recipes.create('chocolate milk', ['cocoa', 'milk', 'sugar'])
+Recipes.create('Peanut butter and Jelly Sandwich',['Two slices of bread','Peanut butter','Jelly'])
+
+// when the root of this route is called with GET, return
+// all current Recipe items by calling `Recipe.get()`
+app.get('/recipes', (req, res) => {
+  res.json(Recipes.get());
+})
+
 app.listen(process.env.PORT || 8080, () => {
   console.log(`Your app is listening on port ${process.env.PORT || 8080}`);
 });
